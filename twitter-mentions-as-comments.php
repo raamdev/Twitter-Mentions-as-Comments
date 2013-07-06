@@ -241,7 +241,16 @@ class Twitter_Mentions_As_Comments extends Plugin_Boilerplate_v_2 {
 				continue;
 
 			//Format the author's name based on cache or call API if necessary
-			$author = $this->build_author_name( $tweet->user->screen_name, true );
+			// $author = $this->build_author_name( $tweet->user->screen_name, true );
+			//Getting the author from the cache is broken, so we force
+			// using just the Tweet author's real name here, unless they don't have one
+			$author = $tweet->user->name;
+			if ( trim( $author ) == '' ) {
+				$author = $tweet->user->screen_name;
+			}
+			else {
+				$author = $tweet->user->name . '(@' . $tweet->user->screen_name . ')';
+			}
 
 			//prepare comment array
 			$commentdata = array(
