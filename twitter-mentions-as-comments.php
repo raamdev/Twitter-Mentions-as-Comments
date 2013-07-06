@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: Twitter Mentions as Comments
+Plugin Name: - [Modified by Raam Dev] Twitter Mentions as Comments
 Plugin URI: http://ben.balter.com/2010/11/29/twitter-mentions-as-comments/
 Description: Queries the Twitter API on a regular basis for tweets about your posts.
 Version: 1.5.6
