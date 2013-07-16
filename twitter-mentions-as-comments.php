@@ -249,7 +249,14 @@ class Twitter_Mentions_As_Comments extends Plugin_Boilerplate_v_2 {
 				$author = $tweet->user->screen_name;
 			}
 			else {
-				$author = $tweet->user->name . '(@' . $tweet->user->screen_name . ')';
+
+				$hide_twitter_handle = apply_filters('tmac_hide_twitter_handle', $hide_twitter_handle);
+
+				if ($hide_twitter_handle) {
+					$author = $tweet->user->name;
+				} else {
+					$author = $tweet->user->name . ' (@' . $tweet->user->screen_name . ')';
+				}
 			}
 
 			//prepare comment array
