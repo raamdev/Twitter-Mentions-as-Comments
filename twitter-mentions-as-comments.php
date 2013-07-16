@@ -223,7 +223,7 @@ class Twitter_Mentions_As_Comments extends Plugin_Boilerplate_v_2 {
 	 * @param unknown $postID
 	 * @returns int number of tweets found
 	 */
-	function insert_metions( $postID ) {
+	function insert_mentions( $postID ) {
 		
 		//Get array of mentions
 		$mentions = $this->calls->get_mentions( $postID );
