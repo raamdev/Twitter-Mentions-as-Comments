@@ -19,6 +19,13 @@
 				</td>
 			</tr>
 			<tr valign="top">
+				<th scope="row"><label for="<?php echo  $this->parent->slug_; ?>[author_twitter]"><?php _e( 'Exclude Author Tweets?', 'twitter-mentions-as-comments' ); ?></label></th>
+				<td>
+					<input type="text" name="<?php echo $this->parent->slug_ ?>[author_twitter]" id="<?php echo $this->parent->slug_ ?>[author_twitter]" value="<?php echo $this->parent->options->author_twitter ?>" size="20"><br />
+					<span class="description"><?php _e( 'Author Twitter Handle to be excluded, e.g., "raamdev". Leave blank to disable this feature.', 'twitter-mentions-as-comments' ); ?></span>
+				</td>
+			</tr>
+			<tr valign="top">
 				<th scope="row"><label for="<?php echo  $this->parent->slug_; ?>[RTs]"><?php _e( 'Exclude ReTweets?', 'twitter-mentions-as-comments' ); ?></label></th>
 				<td>
 					<input name="<?php echo  $this->parent->slug_; ?>[RTs]" type="radio" id="<?php echo  $this->parent->slug_; ?>[RTs][0]" value="0" <?php if ( !$this->parent->options->RTs ) echo 'checked="checked"'; ?>/> <label for="<?php echo  $this->parent->slug_; ?>[RTs][0]"><?php _e( 'Include ReTweets', 'twitter-mentions-as-comments' ); ?></label><BR />

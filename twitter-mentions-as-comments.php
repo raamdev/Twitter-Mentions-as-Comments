@@ -160,6 +160,7 @@ class Twitter_Mentions_As_Comments extends Plugin_Boilerplate_v_2 {
 			'api_key' => '',
 			'api_secret' => '',
 			'bearer_token' => '',
+			'author_twitter' => '',
 		);
 
 	}
@@ -240,6 +241,10 @@ class Twitter_Mentions_As_Comments extends Plugin_Boilerplate_v_2 {
 			if ( $this->options->RTs && substr( $tweet->text, 0, 2 ) == 'RT' )
 				continue;
 
+			//If they exclude the author twitter handle and this is an author mention, skip
+			if ( $this->options->author_twitter && trim(strtolower($tweet->user->screen_name)) == trim(strtolower($this->options->author_twitter)) )
+				continue;
+
 			//Format the author's name based on cache or call API if necessary
 			// $author = $this->build_author_name( $tweet->user->screen_name, true );
 			//Getting the author from the cache is broken, so we force
@@ -249,9 +254,8 @@ class Twitter_Mentions_As_Comments extends Plugin_Boilerplate_v_2 {
 				$author = $tweet->user->screen_name;
 			}
 			else {
-
+				// Let site owners override the inclusion of the Twitter handle in the mention name
 				$hide_twitter_handle = apply_filters('tmac_hide_twitter_handle', $hide_twitter_handle);
-
 				if ($hide_twitter_handle) {
 					$author = $tweet->user->name;
 				} else {
