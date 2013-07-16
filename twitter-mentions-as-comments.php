@@ -234,16 +234,23 @@ class Twitter_Mentions_As_Comments extends Plugin_Boilerplate_v_2 {
 			return 0;
 		}
 
+		// keep track of number of skipped mentions
+		$skipped_mentions = 0;
+
 		//loop through mentions
 		foreach ( $mentions->statuses as $tweet ) {
 
 			//If they exclude RTs, look for "RT" and skip if needed
-			if ( $this->options->RTs && substr( $tweet->text, 0, 2 ) == 'RT' )
+			if ( $this->options->RTs && substr( $tweet->text, 0, 2 ) == 'RT' ) {
+				$skipped_mentions++;
 				continue;
+			}
 
 			//If they exclude the author twitter handle and this is an author mention, skip
-			if ( $this->options->author_twitter && trim(strtolower($tweet->user->screen_name)) == trim(strtolower($this->options->author_twitter)) )
+			if ( $this->options->author_twitter && trim(strtolower($tweet->user->screen_name)) == trim(strtolower($this->options->author_twitter)) ) {
+				$skipped_mentions++;
 				continue;
+			}
 
 			//Format the author's name based on cache or call API if necessary
 			// $author = $this->build_author_name( $tweet->user->screen_name, true );
@@ -291,7 +298,7 @@ class Twitter_Mentions_As_Comments extends Plugin_Boilerplate_v_2 {
 		update_post_meta( $postID, 'tmac_last_id', $mentions->max_id_str );
 
 		//return number of mentions found
-		return sizeof( $mentions->statuses );
+		return sizeof( $mentions->statuses ) - $skipped_mentions;
 	}
 
 
