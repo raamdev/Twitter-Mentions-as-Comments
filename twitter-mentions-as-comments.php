@@ -313,7 +313,7 @@ class Twitter_Mentions_As_Comments extends Plugin_Boilerplate_v_2 {
 
 		//Loop through each post and check for new mentions
 		foreach ( $posts as $post )
-			$mentions += $this->insert_metions( $post->ID );
+			$mentions += $this->insert_mentions( $post->ID );
 
 		//update the stored API counter
 		$this->options->api_call_counter = $this->calls->count;
